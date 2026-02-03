@@ -1,8 +1,8 @@
 # Vibelympics: Vibe Your Way to Assemble 🏅✨
 
-Welcome to Vibe Your Way to New York! WE've got a challenge for you, and the top winner will get to fly to New York City for [Chainguard Assemble](https://assemble.chainguard.dev/event/2991fca2-5be2-48cb-a8b9-132ab575cd51/summary) to have their vibecoding skills recognized onstage.
+Welcome to Vibe Your Way to New York! We've got a challenge for you, and the top winner will get to fly to New York City for [Chainguard Assemble](https://assemble.chainguard.dev/event/2991fca2-5be2-48cb-a8b9-132ab575cd51/summary) to have their vibecoding skills recognized onstage.
 
-Assemble takes place on March 16-18th. Travel within the continential US and lodging will be covered by Chainguard for the winner. 
+Assemble takes place on March 16-18th. Travel within the continental US and lodging will be covered by Chainguard for the winner. 
 
 ## Entering the Competition
 
