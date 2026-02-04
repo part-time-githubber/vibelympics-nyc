@@ -11,7 +11,7 @@ To register for the competition, follow these steps:
 1. Make sure you're [logged in to GitHub](https://github.com/login).
 2. Navigate to the [Vibelympics-nyc repository](https://github.com/chainguard-demo/vibelympics-nyc) (this page).
 3. Click the `Fork` button in the top right corner of the page to create your own copy of the repository.
-4. Fill out the registration form (link coming soon). For the field labeled "GitHub repository URL," share the link to the forked repository you just created.
+4. Fill out the [registration form](https://docs.google.com/forms/d/e/1FAIpQLScEzRCiEsv3vfCLcp__3Y0OS6-gvgp6rFqr71ho-lIvvt_LAg/viewform). For the field labeled "GitHub Repo link," share the link to the forked repository you just created.
 
 After registering:
 

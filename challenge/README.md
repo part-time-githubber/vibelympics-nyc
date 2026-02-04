@@ -9,7 +9,7 @@
 
 
 ## The Challenge
-Build an idle game a la [Cookie Clicker](https://orteil.dashnet.org/cookieclicker/), [A Dark Room](https://adarkroom.doublespeakgames.com/), or [Universal Paperclips](https://www.decisionproblem.com/paperclips/). These are games where "number go up," often on their own. But can you make number go up...without numbers?
+Build an idle game a la [Cookie Clicker](https://orteil.dashnet.org/cookieclicker/), [A Dark Room](https://adarkroom.doublespeakgames.com/), or [Universal Paperclips](https://www.decisionproblem.com/paperclips/). These are games where "number go up," often on their own. But can you make number go up...without number?
 
 The wrinkle here is to make a functional idle game without any numbers visible to the player (you can have numbers in the code). It's up to you how you want to show progress, or whether there will even be progress. 
 
