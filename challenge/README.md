@@ -1,26 +1,37 @@
-# Challenge Games Without Number
+# Aangan: The Courtyard (V2)
 
-<img src="../assets/numbers.png" width="700" alt="Mr. Bean meme of him getting progressively more bord. Text is waiting for 42, 68 70 94 memes to get funny">
+A meditative idle game where you restore life to a forgotten courtyard. No numbers, just vibes.
 
-## Themes
-- Vibes-only progress
-- Number go up. But without numbers
-- Build with Chainguard Containers
+## Features (V2)
+-   **Realistic Visuals**: High-quality digital art assets for a deeply immersive experience.
+-   **Evolving Audio**: A generative ambient soundscape that grows richer as the garden comes to life.
+-   **Educational**: Click on objects like the Tulsi plant or Rangoli to learn about their cultural significance.
+-   **Dynamic Progression**: Water the earth to see it transform from dry cracked soil to a lush sanctuary.
 
+## How to Play
+1.  **Interact**: Click/Tap anywhere to water the earth.
+2.  **Listen**: Use headphones for the best experience. The soundscape evolves.
+3.  **Learn**: Click on the Tulsi, Rangoli, or Peacock to read about them.
 
-## The Challenge
-Build an idle game a la [Cookie Clicker](https://orteil.dashnet.org/cookieclicker/), [A Dark Room](https://adarkroom.doublespeakgames.com/), or [Universal Paperclips](https://www.decisionproblem.com/paperclips/). These are games where "number go up," often on their own. But can you make number go up...without number?
+## Tech Stack
+-   **Frontend**: Vanilla HTML5 Canvas & Web Audio API. 
+-   **Assets**: AI-generated imagery (DALL-E 3) for the courtyard elements.
+-   **Container**: Built on `cgr.dev/chainguard/nginx:latest` for a secure, minimal footprint.
 
-The wrinkle here is to make a functional idle game without any numbers visible to the player (you can have numbers in the code). It's up to you how you want to show progress, or whether there will even be progress. 
+## Running the Game
 
-## Requirements
-- Build an [idle game](https://en.wikipedia.org/wiki/Incremental_game)
-- No numbers visible in the interface
-- Direct number proxies (i.e. bars) are allowed but mildly frowned upon
-- Use [Chainguard Containers](https://www.chainguard.dev/containers)
+### Using Docker (Recommended)
+1.  **Build the image**:
+    ```bash
+    docker build -t aangan .
+    ```
 
-## Submission
-To submit, simply replace the contents of this folder with the code for your project. Make sure to replace this README.md with instructions on getting your project running. Also make sure your fork of this repository is public and that you've pushed all the code you want us to see. We will pull in your submission directly from your repository.
+2.  **Run the container**:
+    ```bash
+    docker run -p 8080:8080 aangan
+    ```
 
-## Deadline
-February 13, 11:59 PM EST
+3.  Open `http://localhost:8080`.
+
+### Local Development
+Simply open `index.html` in your browser. Note: Audio requires user interaction (click) to start due to browser policies.
