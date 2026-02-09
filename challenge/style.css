@@ -1,11 +1,14 @@
-body, html {
+body,
+html {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background-color: #dcbfa6; /* A default "dry earth" color */
-    font-family: 'Courier New', Courier, monospace; /* Placeholder font */
+    background-color: #dcbfa6;
+    /* A default "dry earth" color */
+    font-family: 'Courier New', Courier, monospace;
+    /* Placeholder font */
 }
 
 #game-container {
@@ -26,10 +29,13 @@ canvas {
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* Let clicks pass through to canvas primarily */
+    pointer-events: none;
+    /* Let clicks pass through to canvas primarily */
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    padding-left: 10%;
+    /* Move to mid-left */
 }
 
 .interactive {

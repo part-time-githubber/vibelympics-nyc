@@ -23,7 +23,14 @@ const state = {
     transitionProgress: 0,
     assets: {},
     loaded: false,
-    audioInitialized: false
+    assets: {},
+    loaded: false,
+    audioInitialized: false,
+    // Secrets State
+    peacockClicks: 0,
+    autoClicker: false,
+    mantraIndex: 0,
+    mantraWords: ['Peace', 'Life', 'Breath', 'Light', 'Void', 'Nirvana']
 };
 
 // Audio Engine (Web Audio API)
@@ -191,58 +198,89 @@ function createMuteButton() {
     btn.style.position = 'absolute';
     btn.style.top = '20px';
     btn.style.right = '20px';
-    btn.style.fontSize = '24px';
-    btn.style.background = 'none';
+    btn.style.fontSize = '30px'; // Larger
+    btn.style.width = '50px';
+    btn.style.height = '50px';
+    btn.style.display = 'flex';
+    btn.style.justifyContent = 'center';
+    btn.style.alignItems = 'center';
+    btn.style.background = 'rgba(255, 255, 255, 0.5)'; // Semi-transparent bg
+    btn.style.borderRadius = '50%';
     btn.style.border = 'none';
     btn.style.cursor = 'pointer';
+    btn.style.zIndex = '2000'; // Ensure on top
     btn.style.pointerEvents = 'auto'; // Enable clicks
     btn.onclick = (e) => {
         e.stopPropagation();
         const icon = audioSystem.cycleVolume();
         btn.innerHTML = icon;
     };
-    document.getElementById('ui-layer').appendChild(btn);
+    document.body.appendChild(btn); // Append to body to avoid flex container issues
 }
 
 function checkObjectClick(x, y) {
     const cx = canvas.width / 2;
     const groundY = canvas.height * 0.85;
 
-    // Tulsi (Center Bottom)
-    // Drawn at: groundY - pH + 120. pH varies ~240-400.
-    // Approximate center: cx, groundY - 50
-    if (state.stage >= 1 && Math.abs(x - cx) < 100 && Math.abs(y - (groundY - 50)) < 150) {
-        showModal('Tulsi (Holy Basil)', 'Considered a goddess in plant form, Tulsi is worshipped in many Indian homes for purification and divine protection.');
-        return;
-    }
 
-    // Mango Tree (Top Center)
-    // Drawn at: cx - tW/2, -100. tW varies ~400-800.
-    // Huge canopy at top.
-    if (state.stage >= 3 && Math.abs(x - cx) < 300 && y < 300) {
-        showModal('Mango Tree', 'The King of Fruits. Mango leaves are used in auspicious ceremonies, and the tree represents prosperity and fertility.');
-        return;
-    }
 
-    // Rangoli (Floor Center)
+    // Rangoli (Floor Center) - Check FIRST (Small target overlapping Tulsi)
     // Drawn at: cx - 150, groundY - 50. Size 300x180.
     if (state.stage >= 4 && Math.abs(x - cx) < 150 && Math.abs(y - (groundY + 40)) < 80) {
+        // Secret: precise center click
+        if (Math.abs(x - cx) < 40 && Math.abs(y - (groundY + 40)) < 40) {
+            triggerRangoliFestival();
+            showModal('Festival of Lights', 'The Rangoli is lit! Prosperity flows into the home.');
+            return;
+        }
+
         showModal('Rangoli / Kolam', 'Geometric patterns drawn on the threshold to welcome Goddess Lakshmi and bring good luck. Made with rice flour or chalk.');
         return;
     }
 
+    // Tulsi (Center Bottom)
+    // Drawn at: groundY - pH + 120. pH varies ~240-400.
+    // Approximate center: cx, groundY - 50
+    if (state.stage >= 1 && Math.abs(x - cx) < 100 && Math.abs(y - (groundY - 50)) < 150) {
+        advanceMantra('Tulsi');
+        return;
+    }
+
+    // Mango Tree (Top Center)
+    if (state.stage >= 3 && Math.abs(x - cx) < 300 && y < 300) {
+        advanceMantra('The Tree');
+        return;
+    }
+
+
+
+
     // Peacock (Moving Entity)
-    // Size ~240px. Centered around e.x, e.y.
-    // Drawn at e.x, e.y - size + 50
     state.entities.forEach(e => {
         if (e.type === 'peacock') {
-            // Simple bounding box around the bird
+            // Simple bounding box
             if (Math.abs(x - (e.x + 50)) < 100 && Math.abs(y - (e.y - 100)) < 100) {
-                showModal('Peacock (Mayura)', 'The national bird of India, representing grace, pride, and beauty. Associated with Lord Kartikeya and Goddess Saraswati.');
+                // Secret: Peacock Dance (5 Clicks)
+                if (!state.peacockClicks) state.peacockClicks = 0;
+                state.peacockClicks++;
+                state.lastPeacockClickTime = Date.now(); // Track time for reset
+
+                spawnFeatherParticles(e.x, e.y); // Feedback
+
+                if (state.peacockClicks >= 5) {
+                    state.peacockClicks = 0;
+                    triggerPeacockDance();
+                    showModal('Peacock Dance!', ' The peacock dances in joy! (Auto-clicks active for 5s)');
+                } else {
+                    if (state.peacockClicks === 1) {
+                        showModal('Peacock (Mayura)', 'The national bird of India. (Keep clicking to see it dance!)');
+                    }
+                }
             }
         }
     });
-}
+
+} // End checkObjectClick
 
 function showModal(title, text) {
     // Create or reuse modal
@@ -325,8 +363,8 @@ function spawnPeacock() {
     state.entities.push({
         type: 'peacock',
         x: -200,
-        y: canvas.height - canvas.height * 0.2, // Walk on bottom area
-        vx: 1.5, // Faster walk
+        y: (canvas.height - canvas.height * 0.2) - 75, // Moved up 75px
+        vx: 1.125, // 3/4th of 1.5
         scale: 0.8
     });
 }
@@ -356,10 +394,149 @@ function triggerMonsoon() {
     }
 }
 
+function spawnDiyaParticles(x, y) {
+    for (let i = 0; i < 5; i++) {
+        state.particles.push({
+            x: x, y: y,
+            vx: (Math.random() - 0.5) * 2, // Slow rising
+            vy: -Math.random() * 5, // Upwards
+            life: 2.0,
+            color: '#FFA500', // Orange/Gold
+            type: 'fire'
+        });
+    }
+}
+
+function triggerRangoliFestival() {
+    const cx = canvas.width / 2;
+    const groundY = canvas.height * 0.85;
+    const cy = groundY + 40;
+
+    // Spawn ring of fire interaction
+    for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+            spawnDiyaParticles(cx + (Math.random() - 0.5) * 100, cy + (Math.random() - 0.5) * 50);
+            state.clicks += 5; // Bonus clicks
+        }, i * 200);
+    }
+}
+
+// Mantra State
+let lastMantraTime = 0;
+let mantraClicks = 0;
+
+function advanceMantra(source) {
+    // 1. Gate by Stage (Must have Rangoli)
+    if (state.stage < 4) {
+        // Show default info if too early
+        if (source === 'Tulsi') showModal('Tulsi (Holy Basil)', 'Considered a goddess in plant form, Tulsi is worshipped in many Indian homes for purification and divine protection.');
+        if (source === 'The Tree') showModal('Mango Tree', 'The King of Fruits. Mango leaves are used in auspicious ceremonies, and the tree represents prosperity and fertility.');
+        return;
+    }
+
+    // 2. Cooldown (5 seconds between words)
+    const now = Date.now();
+    if (now - lastMantraTime < 5000) return;
+
+    // 3. Click Count Requirement (Need 5 clicks per word to "meditate")
+    mantraClicks++;
+    if (mantraClicks < 5) {
+        // Maybe a subtle visual hint?
+        spawnWaterParticles(canvas.width / 2, canvas.height / 2);
+        return;
+    }
+
+    // Success: Reveal Word
+    mantraClicks = 0;
+    lastMantraTime = now;
+
+    const word = state.mantraWords[state.mantraIndex];
+    showModal(`Whisper from ${source}`, `"... ${word} ..."`);
+    state.mantraIndex++;
+
+    // Check for Nirvana
+    if (state.mantraIndex >= state.mantraWords.length) {
+        setTimeout(triggerNirvana, 4000); // Longer delay before fade
+    }
+}
+
+function triggerNirvana() {
+    // 1. Fade out UI
+    const ui = document.getElementById('ui-layer');
+    if (ui) ui.style.opacity = '0';
+
+    // 2. White Overlay
+    const overlay = document.createElement('div');
+    overlay.style.position = 'absolute';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.backgroundColor = 'white';
+    overlay.style.opacity = '0';
+    overlay.style.transition = 'opacity 5s ease-in';
+    overlay.style.zIndex = '1000';
+    overlay.style.display = 'flex';
+    overlay.style.alignItems = 'center';
+    overlay.style.justifyContent = 'center';
+    overlay.style.fontSize = '40px';
+    overlay.style.color = '#333';
+    overlay.style.fontFamily = 'Courier New';
+    overlay.innerHTML = '<p>The Courtyard is Restored.<br><span style="font-size:20px">The Mind is at Peace.</span></p>';
+
+    document.body.appendChild(overlay);
+
+    // Trigger Fade
+    requestAnimationFrame(() => {
+        overlay.style.opacity = '1';
+    });
+
+    // 3. Audio Fade Out
+    if (audioSystem.masterGain) {
+        audioSystem.masterGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 5);
+    }
+}
+
+function spawnFeatherParticles(x, y) {
+    const colors = ['#00a8cc', '#00d100', '#ffd700']; // Peacock colors
+    for (let i = 0; i < 8; i++) {
+        state.particles.push({
+            x: x, y: y,
+            vx: (Math.random() - 0.5) * 10,
+            vy: (Math.random() - 0.5) * 10,
+            life: 1.5,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            type: 'feather'
+        });
+    }
+}
+
+function triggerPeacockDance() {
+    state.autoClicker = true;
+    // Burst effect
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+    for (let i = 0; i < 50; i++) {
+        spawnFeatherParticles(cx + (Math.random() - 0.5) * 200, cy + (Math.random() - 0.5) * 100);
+    }
+
+    // Disable after 5s
+    setTimeout(() => {
+        state.autoClicker = false;
+    }, 5000);
+}
+
 function update(deltaTime) {
     if (state.transitionProgress < 1) {
         state.transitionProgress += deltaTime * 0.5;
         if (state.transitionProgress > 1) state.transitionProgress = 1;
+    }
+
+    // Auto Clicker (Peacock Dance)
+    if (state.autoClicker) {
+        state.clicks += 10 * deltaTime; // 10 clicks per second
+        checkProgression();
+        if (Math.random() < 0.1) spawnWaterParticles(canvas.width * Math.random(), canvas.height * Math.random());
     }
 
     // Update Particles
@@ -381,7 +558,16 @@ function update(deltaTime) {
     // Update Entities
     state.entities.forEach(e => {
         if (e.type === 'peacock') {
-            e.x += e.vx;
+            // Stop moving if clicked (but not dancing)
+            if (state.peacockClicks > 0 && !state.autoClicker) {
+                // Reset if idle for 5 seconds
+                if (Date.now() - (state.lastPeacockClickTime || 0) > 5000) {
+                    state.peacockClicks = 0;
+                }
+            } else {
+                e.x += e.vx;
+            }
+
             if (e.x > canvas.width + 200) e.x = -200;
         }
     });
