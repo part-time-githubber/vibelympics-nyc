@@ -1,96 +1,88 @@
-# Vibelympics: Vibe Your Way to Assemble 🏅✨
+# Aangan (आँगन): The Courtyard
 
-Welcome to Vibe Your Way to New York! We've got a challenge for you, and the top winner will get to fly to New York City for [Chainguard Assemble](https://assemble.chainguard.dev/event/2991fca2-5be2-48cb-a8b9-132ab575cd51/summary) to have their vibecoding skills recognized onstage.
+A meditative idle game where you restore life to a forgotten courtyard. No numbers, just vibes.
 
-Assemble takes place on March 16-18th. Travel within the continental US and lodging will be covered by Chainguard for the winner. 
+## Features
+-   **Realistic Visuals**: High-quality digital art assets for a deeply immersive experience.
+-   **Evolving Audio**: A generative ambient soundscape that grows richer as the garden comes to life.
+-   **Educational**: Click on objects like the Tulsi plant or Rangoli to learn about their cultural significance.
+-   **Dynamic Progression**: Water the earth to see it transform from dry cracked soil to a lush sanctuary.
+-   **Hidden Secrets**: Discover the hidden interactions with the Peacock, Rangoli, and the Mango Tree.
 
-## Entering the Competition
+## Visual Journey
+Aangan is about transformation.
 
-To register for the competition, follow these steps:
+| **The Beginning (Dry Earth)** | **The Destination (Lush Sanctuary)** |
+| :---: | :---: |
+| ![Begin State](begin_state.png) | ![End State](end_state.png) |
 
-1. Make sure you're [logged in to GitHub](https://github.com/login).
-2. Navigate to the [Vibelympics-nyc repository](https://github.com/chainguard-demo/vibelympics-nyc) (this page).
-3. Click the `Fork` button in the top right corner of the page to create your own copy of the repository.
-4. Fill out the [registration form](https://docs.google.com/forms/d/e/1FAIpQLScEzRCiEsv3vfCLcp__3Y0OS6-gvgp6rFqr71ho-lIvvt_LAg/viewform). For the field labeled "GitHub Repo link," share the link to the forked repository you just created.
+## Game Stages & Progression
+Aangan unfolds based on your clicks.
 
-After registering:
+-   **Stage 0 (0-5 clicks)**: The Courtyard is dry and barren.
+-   **Stage 1 (5+ clicks)**: **Life Returns**. The background begins to turn lush green. The **Tulsi Pot** appears. Audio: Base drone + Fifth.
+-   **Stage 2 (25+ clicks)**: **The Spirit Awakens**. Random events like the "Grandmother's Blessing" begin to occur (0.5% chance per click).
+-   **Stage 3 (75+ clicks)**: **Prosperity**. The great **Mango Tree** grows in the background. The **Peacock** arrives. Rain (Monsoon) becomes possible (0.2% chance per click). Audio: High shimmering note added.
+-   **Stage 4 (200+ clicks)**: **Celebration**. The **Rangoli** pattern appears on the floor. **The Mantra** quest becomes available.
+-   **Stage 5 (400+ clicks)**: **Abundance**. Visuals are fully lush.
+-   **Stage 6 (1000+ clicks)**: **Nirvana**. The cycle is complete.
 
-1. Edit this README with information related to the project you create for the competition.
-2. Review the challenge folder for information on the challenge.
-3. Start vibing!
+## Secrets & Mechanics
+The courtyard holds secrets for those who explore.
 
-## Schedule
+### 1. The Peacock's Dance (Hidden Auto-Clicker)
+*   **Availability**: Stage 3+
+*   **How to trigger**: Click the Peacock **5 times** rapidly while it walks.
+*   **Mechanic**:
+    *   If you stop clicking for **5 seconds**, the count resets and the peacock resumes walking.
+    *   The peacock moves at a relaxed pace (1.125 speed).
+*   **Effect**: The peacock dances (particle burst) and grants an **Auto-Clicker** (10 clicks/sec) for **5 seconds**.
+*   **Visual**: Colorful feather particles (Blue, Green, Gold).
 
-| | Date |
-|---|---|
-| Challenge Opens | February 4, 2026 |
-| Submission Deadline | February 13, 11:59 PM EST |
-| Winners Announced | February 15 |
-| Assemble NYC | March 16-18, 2026 |
+### 2. Rangoli Harmony (Festival Mode)
+*   **Availability**: Stage 4+
+*   **How to trigger**: Click the **exact center** of the Rangoli pattern (small hitbox).
+*   **Effect**: "Festival of Lights" - A burst of Diya lights (gold particles) and a bonus of **100 clicks** (20 diyas x 5 clicks).
+*   **Visual**: Rising orange fire particles.
 
-## FAQ
+### 3. The Mantra (Narrative Ending)
+*   **Availability**: Stage 4+
+*   **How to trigger**: Click the **Tulsi Pot** or the **Mango Tree**.
+*   **Mechanic**:
+    1.  **Gated**: You must be at least Stage 4.
+    2.  **Cooldown**: You must wait **5 seconds** between revealing each word.
+    3.  **Meditation**: You must click **5 times** on the object to reveal a single word.
+    4.  **Sequence**: Collect all 6 words: *Peace, Life, Breath, Light, Void, Nirvana*.
+*   **Ending**: Upon collecting the final word, the **Nirvana** ending is triggered. The screen fades to white, audio fades out, and a final message appears.
 
-Q: What do you mean, don't look at the code? How are you going to enforce that.
+## Tech Stack
+-   **Frontend**: Vanilla HTML5 Canvas & Web Audio API.
+-   **Assets**: AI-generated imagery (DALL-E 3).
+-   **Container**: Built on `cgr.dev/chainguard/nginx:latest` for a secure, minimal footprint.
 
-A: We can see you through our Chainguard Omniscope at all times and we will be / are monitoring you. By the way, you should consider wearing more interesting socks.
+## Running the Game
 
-Q: No, really. Can I look at the code?
+### Local Development
+Simply open `index.html` in your browser.
+*Note: Audio requires user interaction (click) to start due to browser autoplay policies.*
 
-A: No.
+### Using Docker
+1.  **Build the image**:
+    ```bash
+    docker build -t aangan .
+    ```
+2.  **Run the container**:
+    ```bash
+    docker run -p 8080:8080 aangan
+    ```
+3.  Open `http://localhost:8080`.
 
-Q: Can the AI look at the code?
+## Final message (not using vibe code)
 
-A: Yes, of course. You're starting to get it now.
+(Gen) AI has been such a wonderful assistant for most of us in 2025.
 
-Q: I have a cool idea for the challenge, but, like, I'm worried it violates the requirements you wrote.
+May 2026 be the proliferation of good sensible uses of what otherwise could be a very dangerous race 🌎💕👍
 
-A: What are you, some kind of rule follower? Just do it.
+We all have collective responsibility of keeping this world a happy place for our future generations 🌟🌈
 
-Q: Can I post about my project on *teh socials*?
-
-A: Yes, use hashtag #vibelympics and/or tag Chainguard, we'll do our best to repost / boost.
-
-Q: Can I get a hint or something. I read this far in the FAQ and I'm probably the only one who did that.
-
-A: Yeah, why not. We at Chainguard love talking about our beloved octopus friend Linky, burrito bowls, and wearing hats of all kinds. We also, for some reason, like to use Uber ratings as a judge of character. If you want to pander to us you can incorporate or talk about our products (Chainguard Containers and Chainguard Libraries) or OSS projects we're connected to (Sigstore, K8s, SLSA, Kaniko, Tekton). 
-
-Q: Should we pander to you? Will we win if we do that?
-
-A: Don't you ever get tired of asking questions? You do you. 👈(❛ ᗜ ❛👈)
-
----
-
-NO PURCHASE OR ENTRY FEE REQUIRED TO ENTER OR WIN. MAKING A PURCHASE OR BECOMING A CUSTOMER WILL NOT INCREASE YOUR CHANCE OF WINNING. VOID WHERE PROHIBITED
-THE PRIZES: The winner will receive travel and lodging to New York City for Assemble 2026 (March 16-18, 2026), tickets to Assemble 2026, and recognition on stage at Assemble 2026. The approximate total retail value of this prize is $3,000. There will be a total of one (1) winner selected during the Contest . The total approximate retail value of all prizes is $3,000.
-DATES: The Contest begins on February 4, 2026 at 12:00 AM Pacific Time, and ends on February 13, 2026 at 11:59 PM Pacific Time (the “Contest Period”).  Entries received before or after the Contest Period are not eligible to win.  The Contest Period shall be comprised of 1 “Entry Period” within the Contest Period, with the Entry Period commencing on February 4, 2026 at 12:00 AM PT, and ending on February 13, 2026 at 11:59 PM PT.  Entries received during an Entry Period are only eligible to win the prize for that Entry Period, and any Entries received before or after each Entry Period are not eligible to win the prize for that Entry Period.  Chainguard is not responsible for any lost, late, illegible, incomplete, damaged, mutilated, misdirected, misdelivered, or delayed Entries, or for technical or human errors or failures of any kind in connection with the submission, transmission, processing or judging of Entries, including without limitation, any malfunctions or failures of computer hardware, computer software, networks or telephone equipment, or any technical problems or traffic congestion on the Internet or at any website or any combination thereof.
-
-ELIGIBILITY: The Contest is open to all legal residents, age 18 or older during the Entry Period, of one of the fifty (50) states of the United States (excluding Rhode Island) or the District of Columbia or are United States citizens with a permanent United States address and currently residing on an overseas United States military installation. Residents of Rhode Island not eligible to enter or win.  Current or former (within the immediately preceding 12 months) employees, officers, directors, and contractors of Chainguard, and anyone involved in the administration of the Contest, and any member of the immediate family (i.e., spouses, domestic partners, siblings, parents, children, grandparents, grandchildren and other persons residing in the same household (related or not) of any of the foregoing individuals), are not eligible.  
-
-HOW TO ENTER: During the Entry Period, you may enter by completing the Vibelympics coding challenge available at Chainguard’s designated GitHub repository and submitting your entry as instructed in the repository.
-BY ENTERING THE CONTEST, YOU AGREE TO RECEIVE EMAILS (INCLUDING MARKETING MATERIALS, ADVERTISEMENTS AND NEWSLETTERS) PERIODICALLY AND FROM TIME TO TIME FROM CHAINGUARD.  YOU CAN OPT-OUT OF RECEIVING THESE COMMUNICATIONS AT ANY TIME BY CLICKING THE UNSUBSCRIBE LINK CONTAINED IN SUCH EMAILS.  NO SUCH OPT OUT SHALL AFFECT THE ELIGIBILITY OF ANY ENTRY RECEIVED PRIOR TO THE DATE OF SUCH OPT OUT.  
-All Entries must fulfill all requirements as specified herein to be eligible to win a prize. 
-
-NUMBER OF ENTRIES: Limit of one entry per person per email address, and only one entry per person, household, and email address is permitted. Any person with multiple email addresses may only enter once. You may not enter more times than indicated by using multiple email addresses, identities or devices in an attempt to circumvent these rules. Any person submitting multiple Entries or violating any of these Rules may be disqualified. Only eligible Entries actually received by Chainguard during the applicable Entry Period will be included in the prize selection process for that Entry Period and each eligible Entry is only valid for the Entry Period in which it was entered.
-WINNER SELECTION: This is a skill-based Contest. The winner will be determined by the judges based on the judging criteria set forth herein, not by random chance. Accordingly, no odds of winning can be calculated.
-
-NOTIFICATION OF WINNERS: On or before February 15, 2026, the judges will evaluate all eligible Entries and select one (1) winner based on the judging criteria set forth in these Rules. Entries will be judged on the following criteria, weighted equally unless otherwise determined by the judges in their sole discretion: (i) Security – the extent to which the code submission demonstrates secure coding practices and minimizes vulnerabilities; (ii) Functionality – the extent to which the code performs the intended task correctly and completely; (iii) Code Quality – the extent to which the code is clean, well-organized, maintainable, and follows best practices; and (iv) Creativity – the extent to which the submission demonstrates innovative or novel approaches to the challenge. The judges for this Contest are Patrick Smyth and Lisa Tagliaferri from the Chainguard Developer Relations team; provided, however, that Chainguard reserves the right, in its sole discretion, to substitute or add judges if any designated judge becomes unavailable or as otherwise deemed necessary by Chainguard. The decisions of the judges are final and binding on all matters relating to the Contest. In the event of a tie, the tied Entries will be re-evaluated by the judges, with the entry demonstrating superior Security receiving preference. If a tie still remains, Chainguard shall select the winner in its sole discretion. Winners will be notified by an email sent to the email address provided by that Winner in their Entry. Upon notification, the winner will have 48 hours from the time the direct message or email was sent to send a reply email to Chainguard. Failure to timely respond within said 48 hours may result in disqualification, and an alternate potential winner may then be selected. Only winners will be notified. If a potential winner cannot be contacted, is found to be ineligible, declines to accept the prize or does not follow these Rules, for any reasons whatsoever, the prize may be forfeited in Chainguard’s sole discretion. If a prize is forfeited, then the prize may be awarded to an alternate winner, selected by the judges from among all remaining eligible Entries received, as determined by Chainguard in its sole discretion. Chainguard shall not responsible for any delays in awarding the prize for any reason. Each prize will only be awarded to a verified winner, and Chainguard in its sole discretion, may require each person who submits an entry to provide verification of eligibility as a condition of receiving a prize. Any unclaimed prizes will be awarded to an alternate winner selected by the judges as necessary. Prizes will be coordinated with the winner promptly following verification to ensure travel and lodging arrangements can be made for Assemble 2026 (March 16-18, 2026). Upon verification by Chainguard that the entrant was eligible, the prize will be sent to the address provided by the entrant at the time of verification. Winners must provide a valid mailing address and P.O. Box addresses are ineligible. No cash or other prize substitutions are permitted, except that Chainguard reserves the right, in its sole discretion, to substitute a prize of equal or greater value if the advertised prize (or any component thereof) becomes unavailable. Chainguard will not replace any lost or stolen prizes. Winners are solely responsible for any and all federal, state and local taxes, if any, that apply to prizes. Chainguard will issue an IRS Form 1099 to any winner receiving a prize valued at $600 or more, as required by law. All costs and expenses associated with the acceptance or use of any prize is at the sole responsibility of the recipient. Please allow at least three weeks for delivery of prizes. Notwithstanding anything herein to the contrary, if Assemble 2026 is cancelled, postponed, or relocated for any reason, including but not limited to acts of God, public health emergencies, government orders, travel restrictions, or other circumstances beyond Chainguard’s reasonable control, Chainguard may, in its sole discretion, substitute an alternative prize of equal or greater approximate retail value, and such substitution shall constitute full satisfaction of Chainguard’s prize obligations hereunder.
-
-NAME/LIKENESS: By accepting a prize, each entrant consents to Chainguard’s use of their name, photograph and/or likeness, address, voice, and statements made by or attributed to them, in perpetuity, in any and all media now known or hereafter developed (including, without limitation, print, broadcast and Internet), for all legitimate business purposes including advertising and promotional activities without additional compensation, unless prohibited by law. Upon shipping the prize to the winner by mail, Chainguard will be deemed to have awarded the prize to the winner, with the winner assuming full responsibility for the prize. All entrants agree that Chainguard may in its discretion announce the names of the potential Winners.
-
-RESTRICTIONS ON ENTRIES: No entry may contain any offensive or vulgar content; and no entry may contain material that is in violation of or contrary to the laws or regulations in any jurisdiction where the entry is created. Any entry containing inappropriate content, as determined by Chainguard, in its sole and absolute discretion, will be considered ineligible and will not be part of the Contest giveaway. All code submissions must be the original work of the entrant. For purposes of this Contest, “original work” means that the entrant personally directed, prompted, and curated the code submission, including through the use of AI-assisted coding tools, large language models, or other generative AI technologies (“Vibe Coding”). Use of AI tools to assist in generating code is permitted and encouraged; however, the entrant must be the sole author of the prompts and creative direction used to generate the submission. Entries must not infringe upon any third-party intellectual property rights, including but not limited to copyrights, trademarks, or patents. Entrants may use open source libraries and tools, provided such use complies with applicable open source licenses. By submitting an Entry, entrant represents and warrants that: (a) the Entry is entrant’s original work as defined herein; (b) entrant has the right to submit the Entry; (c) the Entry does not violate any applicable laws or third-party rights; and (d) entrant grants Chainguard a non-exclusive, perpetual, irrevocable, worldwide, royalty-free license to use, reproduce, modify, create derivative works from, publish, distribute, publicly perform, and display the Entry, in whole or in part, for any purpose, including but not limited to marketing, promotional, and educational purposes. Notwithstanding the foregoing, any entry submitted through automated means—including bots, scripts, programs designed to automatically submit entries to this Contest—is prohibited and will be disqualified. Chainguard has the right, in its sole and absolute discretion, to maintain the integrity of the Contest, to void any entries for any reason, including, but not limited to, multiple entries from the same person or household in excess of that allowed by these Rules, or entries that Chainguard determines were not created in compliance with these Rules.
-
-ADDITIONAL DISCLAIMERS AND DISCLOSURES: Chainguard reserves the right to modify, suspend or cancel this Contest, in whole or in part, at any time, and for any reason whatsoever. Chainguard further reserves the right in its sole discretion to disqualify any individual who violates these Rules, tampers with the entry process, or acts in any way that would, in any way, discredit or harm the reputation of Chainguard and to cancel, modify, or suspend the Contest if any person engages in fraud or misconduct or other conduct beyond the control of Chainguard which corrupts the administration, integrity, security, or proper operation of the Contest, as determined in Chainguard’s sole discretion. If there is a dispute as to the identity of a Winner, the Prize will be awarded to the authorized account holder of the e-mail address associated with the winning Entry. Chainguard shall have no liability for a Winner’s failure to receive notices due to Winners’ spam, junk e-mail or other security settings or for Winners’ provision of incorrect or otherwise non-functioning contact information.
-
-INDEMNIFICATION: By participating in this Contest, you agree to release and hold harmless Chainguard, its officers, directors, representatives, agents and employees, from any and all liability whatsoever for any injuries, losses or damages of any kind, to persons or property, arising from or in connection with, either directly or indirectly from: (i) the awarding, acceptance, receipt, possession, use or misuse of any prize awarded herein; (ii) participation in the Contest or any prize related activities; (iii) technical failures of any kind, including but not limited any loss or damage to any entry, the malfunctioning of any computer, cable, network, hardware or software; the unavailability or inaccessibility of any transmissions or telephone or Internet service; (iv) any unauthorized human intervention in any part of the entry process or the Contest; and (v) electronic or human error which may occur in the administration of the Contest or the processing of entries; all to the maximum extent allowed by law. NOTWITHSTANDING ANYTHING TO THE CONTRARY, IN NO EVENT WILL CHAINGUARD, OR ANY OF ITS EMPLOYEES, BE LIABLE TO ANY ENTRANT OR ANY THIRD PARTY FOR ANY INJURY TO PERSON, INJURY TO PROPERTY, OR FOR ANY SPECIAL, COMPENSATORY, DIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF ANY KIND, WHETHER BASED ON BREACH OF CONTRACT, TORT (INCLUDING NEGLIGENCE) OR OTHERWISE, WHETHER OR NOT CHAINGUARD HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. Some jurisdictions may not permit certain liability limitations, or waivers, or restrictions, including those relating to any and all injuries, losses, or damages (including compensatory, direct, incidental, consequential or otherwise) of any kind arising in connection with or as a result of the acceptance, possession, or use of the prize, or from participation in the Contest. If any court determines the law of such a jurisdiction applies, Chainguard’s liability shall be limited to the greatest extent permitted by such applicable law.
-
-ARBITRATION: As a condition of participating in this Contest, but except where prohibited by law, each entrant agrees that any and all disputes, controversies, claims or causes of action arising out of or connected with this Contest, these Rules or any prizes awarded, shall be resolved in binding arbitration individually, and without resort to collective, class, or aggregate action. Any such arbitration must be brought and heard in New Castle County, Delaware, and shall be administered by the American Arbitration Association pursuant to its expedited procedures under its commercial arbitration rules. Judgment on the award rendered by the arbitrator may be entered into any court having jurisdiction thereof. EACH ENTRANT AGREES THAT THEY, AND CHAINGUARD, ARE EACH WAIVING THE RIGHT TO TRIAL BY A JURY TO THE MAXIMUM EXTENT PROVIDED BY LAW. Each entrant, as a condition to registering and submitting an entry, irrevocably waives any right to seek and obtain rescission and equitable and injunctive relief. Additionally, in any dispute, and to the maximum extent permitted by law, under no circumstances will entrant be permitted to obtain awards for, and hereby waives, all rights to claim punitive, incidental, or consequential damages, including reasonable attorneys’ fees, other than entrant’s actual out-of-pocket expenses (i.e. costs associated with entering the Contest), if any, and participant further waives all rights to have damages multiplied or increased.
-
-LAWS: The Contest is governed by United States law, and is subject to all applicable federal, state, and local laws and regulations. These Rules shall be governed by and interpreted under the laws of the State of Delaware without regard to its conflicts of law provisions. This Contest is void where prohibited. Residents of jurisdictions where this Contest is not permitted, or where Chainguard would be required to register or be restricted in any other way, are not eligible to enter or to win a prize.
-
-WINNERS LIST: To obtain an official list of the names of the winners, send a self-addressed stamped business-size envelope to: Chainguard, Inc. ATTN: Kirby Koo, 810 7th St S, Kirkland, WA 98033. Requests must be received by March 13, 2026.
-
-OFFICIAL RULES: If you would like a copy of these Official Rules, please send a self-addressed stamped envelope to: Chainguard, Inc. ATTN: Kirby Koo, 810 7th St S, Kirkland, WA 98033. Vermont residents may omit the return postage. Requests must be received by March 13, 2026. A copy of these Official Rules are also posted athttps://github.com/chainguard-demo/vibelympics-nyc?tab=readme-ov-file
-
-AGREEMENT TO BE BOUND BY THESE OFFICIAL RULES: By entering or participating in the Contest, you accept and agree to be fully and unconditionally bound by these “Rules” and you represent and warrant that you meet all of the eligibility requirements set forth herein. You further agree to accept the decisions of Chainguard as final and binding in all respects as it relates in any and all manner to the Contest and the awarding of prizes. Any attempt by a person to deliberately damage any Web site or undermine the legitimate operation of the Contest is a violation of criminal and civil laws and should such an attempt be made, Chainguard reserves the right to seek damages from any such person to the fullest extent of the law. Chainguard is not responsible for any typographical or other error in the printing of the offer, administration of the Contest, or in the announcement of the prizes. These Contest Rules set forth the entire agreement and understanding between Chainguard and each entrant concerning the subject matter hereof and merges and supersedes all prior discussions, agreements, and understandings of any kind between them. Chainguard’s failure to enforce any provision of these Rules shall not constitute a waiver of any provision contained herein. If any provision of these Rules is held invalid or unenforceable by a court of competent jurisdiction, that provision will be enforced to the maximum extent permissible and the other provisions of these Rules will remain in full force and effect. ANY VIOLATION OF THESE RULES BY ANY WINNER (AT CHAINGUARD’S SOLE DISCRETION) WILL RESULT IN SUCH WINNER’S DISQUALIFICATION AS WINNER OF THE CONTEST AND ALL PRIVILEGES AS WINNER WILL BE IMMEDIATELY TERMINATED.
-
-SPONSOR: Chainguard, Inc. 810 7th St. S, Kirkland, WA 98033.
+#GenAI #MyTakeOnGenAI (https://www.linkedin.com/in/pankaj-tolani/recent-activity/all/)
